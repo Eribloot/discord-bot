@@ -1,11 +1,16 @@
-// commands in their own files are more accessible
-import { SlashCommandBuilder } from "@discordjs/builders";
+// Usage
+// ping => responds with pong
+// *Test command, testing if bot is running
+
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
+const data =  new SlashCommandBuilder()
+  .setName("ping")
+  .setDescription("Replies with Pong");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Replies with Pong"),
+  data: data,
   async execute(interaction) {
-      await interaction.reply("pong");
+      await interaction.reply("Im working correctly, bitch");
   },
 }

@@ -6,27 +6,25 @@
 
 // Require discord.js classes
 const fs = require("fs");
-import { Client, Collection, Intents } from "discord.js";
-import { token } from "../config.json";
-
+const { Client, Collection, Intents } = require("discord.js");
+const { token, prefix } = require('./config.json');
 
 
 // Create new instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// Array of event files to read
-const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"))
+// create array of files with events
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-//Event handler
-for(const file of eventFiles) {
-  const event = require(`./events/${file}`);
-  if(event.once) {
-    client.once(event.name, (...args) => event.execute(...args));
-  } else {
-    client.on(event.name, (...args) => event.execute(...args));
-  }
+// compiles events into execute function => allows to take multiple parameters
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
 }
-
 // Collection to store commmands
 client.commands = new Collection();
 // Array of command files to read
@@ -58,6 +56,12 @@ client.on("interactionCreate", async interaction => {
   }
   
 });
+
+// API detailed error logger
+process.on("unhandledRejection", error => {
+  console.error("unhandled promise rejection:", error);
+});
+
 //Login to discord via token
 client.login(token);
 

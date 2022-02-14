@@ -1,9 +1,12 @@
 // Import necessary classes
-import fs from "fs";
-import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types";
+const fs = require("fs");
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
 // Import token, client, and server info
-import { clientId, guildId, token } from require("../config.json")
+const { clientId, guildId, token } = require("./config.json");
+
+// 
+
 
 // Commands are mapped to json file
 const commands = [];
