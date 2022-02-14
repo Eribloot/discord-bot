@@ -3,10 +3,7 @@ const fs = require("fs");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 // Import token, client, and server info
-const { clientId, guildId, token } = require("./config.json");
-
-// 
-
+const { clientId, guildId, token } = require("../config.json");
 
 // Commands are mapped to json file
 const commands = [];

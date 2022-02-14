@@ -1,5 +1,5 @@
 /**
-* TODO: Inactive filter and kicking
+* TODO: Inactive filter and kicking --> whitelisted users list
 * TODO: Selfies voting
 * TODO: anon concerns
 **/
@@ -7,8 +7,7 @@
 // Require discord.js classes
 const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const { token, prefix } = require('./config.json');
-
+const { token, guildId } = require('./config.json');
 
 // Create new instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
