@@ -7,10 +7,10 @@
 // Require discord.js classes
 const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const { token, guildId } = require('./config.json');
+const { token } = require('./config.json');
 
 // Create new instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, ] });
 
 // create array of files with events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
@@ -39,6 +39,8 @@ for(const file of commandFiles) {
 // Listener for commands
 client.on("interactionCreate", async interaction => {
   if(!interaction.isCommand()) return;
+  if(!interaction.member.permissions.has("ADMINISTRATOR"))
+    return await interaction.reply({ content: "You do not have permisson to access this command.", ephemeral: true});
 
   // retrieve matching command in collection
   const command = client.commands.get(interaction.commandName);
