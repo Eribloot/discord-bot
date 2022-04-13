@@ -3,9 +3,8 @@
 // prompts if the user wants to kick them;
 // yes => kicks the users listed.
 // no => stops the interaction.
-const { SlashCommandBuilder, time } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const { activityMonitor } = require("../events/messageCreate");
 
 const data = new SlashCommandBuilder()
     .setName("inactives")
@@ -14,9 +13,6 @@ const data = new SlashCommandBuilder()
 module.exports = {
     data: data,
     async execute(interaction) {
-
-        const cutoff = new Date(Date.now() - 12096e5);
-        const inactives = activityMonitor.filter(user => user.time < cutoff).map(user => user.username);
 
         const listEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
