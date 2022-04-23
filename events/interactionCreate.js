@@ -10,16 +10,18 @@ if (!testingOn) {
       );
     },
   };
-}
-
-else {
-	module.exports = {
+} else {
+  module.exports = {
     name: "interactionCreate",
     execute(interaction) {
-      if(interaction.isButton())
-        console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered a button!`)
+      if (interaction.isButton())
+        console.log(
+          `${interaction.user.tag} in #${interaction.channel.name} triggered a button!`
+        );
       else
-      console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+        console.log(
+          `${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`
+        );
     },
   };
 }

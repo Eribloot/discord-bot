@@ -4,13 +4,13 @@
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
-const data =  new SlashCommandBuilder()
+const data = new SlashCommandBuilder()
   .setName("ping")
   .setDescription("Replies with Pong");
 
 module.exports = {
   data: data,
   async execute(interaction) {
-      await interaction.reply("Im working correctly, bitch");
+    await interaction.reply("Im working correctly, bitch");
   },
-}
+};
