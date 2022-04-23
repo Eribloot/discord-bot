@@ -16,6 +16,6 @@ const data = new SlashCommandBuilder()
 module.exports = {
   data: data,
   async execute(interaction) {
-    interaction.reply(interaction.options.getString("input"));
+    await interaction.reply(interaction.options.getString("input"));
   }
 }

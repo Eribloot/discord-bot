@@ -1,41 +1,18 @@
 /**
-* TODO: Inactive filter and kicking --> whitelisted users list
 * TODO: Selfies voting
 * TODO: anon concerns
 **/
-// file movement, Sequelize
+// file movement
 const fs = require("fs");
-const Sequelize = require("sequelize");
 
 // Require discord.js classes
+const { Op } = require("sequelize");
 const { Client, Collection, Intents } = require("discord.js");
 const { token } = require('./config.json');
-const { builtinModules } = require("module");
 
 // Create new instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, ] });
 
-//db connection setup
-const sequelize = new Sequelize("database", "user", "password", {
-  host: "localhost",
-  dialect: "sqlite",
-  logging: false,
-  storage: "database.sqlite",
-});
-
-//model setup
-const Activity = sequelize.define("activity", {
-  user: {
-    type: Sequelize.STRING,
-    unique: true,
-    defaultValue: undefined
-  },
-  messageTime: Sequelize.STRING,
-  inactive: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  } 
-})
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 // compiles events into execute function => allows to take multiple parameters
@@ -88,6 +65,3 @@ process.on("unhandledRejection", error => {
 
 //Login to discord via token
 client.login(token);
-
-
-module.exports = sequelize, Activity;
