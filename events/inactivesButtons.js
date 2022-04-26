@@ -1,3 +1,4 @@
+// listener for inactives command
 const { channelMention } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
 const { Users } = require("../data/dbObjects.js");

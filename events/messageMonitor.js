@@ -1,3 +1,4 @@
+// emitter for collecting user messages to monitor activity
 const { Permissions } = require("discord.js");
 const { Users } = require("../data/dbObjects.js");
 const { guildId } = require("../config.json");

@@ -1,7 +1,5 @@
 // when client is ready, run this (once)
 const { testingOn, guildId } = require("../config.json");
-const { SlashCommandBuilder} = require("@discordjs/builders");
-const { Permissions } = require("discord.js");
 const { Users } = require("../data/dbObjects.js");
 
 if (!testingOn) {
@@ -9,9 +7,9 @@ if (!testingOn) {
     name: "ready",
     once: true,
     execute(client) {
-      
 
       console.log(`Ready! Logged in as ${client.user.tag}`);
+
     },
   };
 }
