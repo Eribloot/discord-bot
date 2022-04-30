@@ -1,5 +1,5 @@
 // this emits when a user joins the server.
-const { bold, userMention, channelMention } = require("@discordjs/builders");
+const { bold, userMention } = require("@discordjs/builders");
 const { MessageEmbed }  = require("discord.js");
 const { Users } = require("../data/dbObjects.js");
 
@@ -19,7 +19,7 @@ module.exports = {
       //join log
       const joinLog = new MessageEmbed()
       .setColor("DARK_BUT_NOT_BLACK")
-      .setDescription(`${userMention(id)}, ${bold(username)}  welcome to Intergalactica!`)
+      .setDescription(`${userMention(id)} ${bold(username)}, welcome to Intergalactica!`)
 
 
       await Users.create({
@@ -29,6 +29,6 @@ module.exports = {
       });
 
       logChannel.send({ embeds: [joinLog] });
-      genChannel.send(`Welcome ${userMention(id)}! Make sure to pick some ${channelMention(rolesChannel)} and make an ${channelMention(introChannel)}`);
+      genChannel.send(`Welcome ${userMention(id)}! Make sure to pick some ${rolesChannel} and make an ${introChannel}`);
     },
 }

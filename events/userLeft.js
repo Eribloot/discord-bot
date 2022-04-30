@@ -20,7 +20,7 @@ module.exports = {
       //remove user from database
       await Users.destroy({ where: { user_id: id } });
 
-      logChannel.send({ embeds: leaveLog });
+      logChannel.send({ embeds: [leaveLog] });
 
     },
 }
