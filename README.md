@@ -1,1 +1,1 @@
-# intergalactica-bot
+# discord-bot
