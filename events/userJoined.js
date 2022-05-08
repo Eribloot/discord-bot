@@ -2,19 +2,20 @@
 const { bold, userMention } = require("@discordjs/builders");
 const { MessageEmbed }  = require("discord.js");
 const { Users } = require("../data/dbObjects.js");
+const { Channels } = require("../utils/getChannels.js")
 
 module.exports = {
   name: "guildMemberAdd",
     async execute(member) {
 
       //get needed channels
-      const logChannel = await member.guild.channels.cache.get("742187165659693076");
-      const genChannel = await member.guild.channels.cache.get("744650481682481233");
-      const rolesChannel = await member.guild.channels.cache.get("742303560988885044");
-      const introChannel = await member.guild.channels.cache.get("742567349613232249");
+      const logChannel = Channels.get("join-and-leaves");
+      const genChannel = Channels.get("general");
+      const rolesChannel = Channels.get("roles");
+      const introChannel = Channels.get("introduction")
 
       const username = member.user.tag;
-      const id = member.id
+      const id = member.id;
       
       //join log
       const joinLog = new MessageEmbed()

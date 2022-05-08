@@ -1,29 +1,19 @@
 // when client is ready, run this (once)
-const { testingOn, guildId } = require("../config.json");
+const { guildId } = require("../config.json");
 const { Users } = require("../data/dbObjects.js");
+const { getChannels } = require("../utils/getChannels");
 
-if (!testingOn) {
-  module.exports = {
-    name: "ready",
-    once: true,
-    execute(client) {
+module.exports = {
+  name: "ready",
+   once: true,
+  execute(client) {
+    const server = client.guilds.cache.get(guildId);
+    console.log(`Server: ${server.name}`);
+    console.log(`Member Count: ${server.memberCount}`);
 
-      console.log(`Ready! Logged in as ${client.user.tag}`);
+    getChannels(server);
+    console.log("Channels to use successfully cached.")
 
-    },
-  };
-}
-
-else {
-  module.exports = {
-    name: "ready",
-    once: true,
-     async execute(client) {
-
-      const server = client.guilds.cache.get(guildId);
-      console.log(`Server: ${server.name}`);
-      console.log(`Member Count: ${server.memberCount}`);
-      // --------INACTIVES TESTING--------
-    }
-  }
-}
+    console.log(`Ready! Logged in as ${client.user.tag}`);
+  },
+};
