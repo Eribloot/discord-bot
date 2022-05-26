@@ -5,6 +5,7 @@
 // no => stops the interaction.
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { Op } = require("sequelize");
 const { Users } = require("../data/dbObjects.js");
 
 //dayjs and plugins to query timeframe
@@ -21,18 +22,19 @@ const data = new SlashCommandBuilder()
 module.exports = {
   data: data,
   async execute(interaction) {
-    //get users from db
+    //get users from db and exclude exempt users
     const users = await Users.findAll({
       attributes: ["message_time", "username"],
+      where: { message_time: { [Op.ne]: "N/A" } }
     });
     //filter out users that haven't sent a message in 2 weeks, return username
     const usersList = users
       .map((u) => {
         const messageTime = dayjs(u.message_time, "x");
         const timeframe = dayjs().subtract(14, "day");
-        if (messageTime.isBefore(timeframe)) return u.username;
+        if (messageTime.isBefore(timeframe)) return `${u.username}\n`;
       })
-      .join("\n");
+      .join("");
 
     //Embed
     const listEmbed = new MessageEmbed()

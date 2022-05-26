@@ -16,12 +16,25 @@ module.exports = {
     const currentName = message.author.tag;
     const messageCreated = message.createdTimestamp;
 
-    //if user is exempt, skip
-    if (
-      message.member.permissions.has(Permissions.ALL) ||
-      message.member.premiumSince
-    )
-      return console.log("this user is an admin or a booster.");
+    //if user is exempt, create user without message; "N/A" identifies exempt users
+    if (message.member.permissions.has(Permissions.ALL) || message.member.premiumSince) {
+      
+      //if exempt user is already stored, change only time
+      if(currentUser) {
+        await Users.update(
+          { message_time: "N/A" },
+          { where: { user_id: message.author.id } }
+        );
+        return console.log("booster or admin, message updated to N/A.");
+      }
+
+      //if exempt user is not stored yet, create new entry without message time
+      else
+        return await Users.create({
+          username: currentName,
+          user_id: message.author.id,
+        });
+    }
 
     //if user already exists
     if (currentUser) {
