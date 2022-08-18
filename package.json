@@ -1,11 +1,8 @@
 {
   "dependencies": {
-    "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
-    "dayjs": "^1.11.0",
     "discord-api-types": "^0.26.1",
-    "discord.js": "^13.6.0",
-    "quick.db": "^9.0.2"
+    "discord.js": "^13.10.2"
   },
   "name": "intergalactica-bot",
   "description": "",

@@ -1,23 +1,21 @@
-/**
-* TODO: Selfies voting
-* TODO: anon concerns
-**/
 // file movement
-const fs = require("fs");
+const fs = require("node:fs");
+const path = require("node:path");
 
 // Require discord.js classes
-const { Op } = require("sequelize");
-const { Client, Collection, Intents } = require("discord.js");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { token } = require('./config.json');
 
 // Create new instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, ] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMembers, ] });
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 // compiles events into execute function => allows to take multiple parameters
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
+  const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -27,10 +25,12 @@ for (const file of eventFiles) {
 // Collection to store commmands
 client.commands = new Collection();
 // Array of command files to read
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith('.js'))
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync("commandsPath").filter(file => file.endsWith('.js'))
 // Set each item in array as command in collection
 for(const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+  const filePath = path.join(commandsPath, file)
+  const command = require(filePath);
   // key => command name 
   // value => function of command
   client.commands.set(command.data.name, command);
