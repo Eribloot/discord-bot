@@ -2,7 +2,7 @@
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
     "discord-api-types": "^0.26.1",
-    "discord.js": "^13.10.2"
+    "discord.js": "^14.2.0"
   },
   "name": "intergalactica-bot",
   "description": "",

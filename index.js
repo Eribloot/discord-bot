@@ -26,7 +26,7 @@ for (const file of eventFiles) {
 client.commands = new Collection();
 // Array of command files to read
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync("commandsPath").filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'))
 // Set each item in array as command in collection
 for(const file of commandFiles) {
   const filePath = path.join(commandsPath, file)
@@ -38,9 +38,7 @@ for(const file of commandFiles) {
 
 // Listener for commands
 client.on("interactionCreate", async interaction => {
-  if(!interaction.isCommand()) return;
-  if(!interaction.member.permissions.has("ADMINISTRATOR"))
-    return await interaction.reply({ content: "You do not have permisson to access this command.", ephemeral: true});
+  if(!interaction.isChatInputCommand()) return;
 
   // retrieve matching command in collection
   const command = client.commands.get(interaction.commandName);

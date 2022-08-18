@@ -2,15 +2,14 @@
 // ping => responds with pong
 // *Test command, testing if bot is running
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
-const data = new SlashCommandBuilder()
-  .setName("ping")
-  .setDescription("Replies with Pong");
-
+const { SlashCommandBuilder } = require("discord.js");
+ 
 module.exports = {
-  data: data,
-  async execute(interaction) {
+  data: new SlashCommandBuilder()
+.setName('ping')
+.setDescription('Replies with Pong!'),
+
+async execute(interaction) {
     await interaction.reply("Im working correctly, bitch");
   },
 };

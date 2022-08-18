@@ -20,6 +20,10 @@ for(const file of commandFiles) {
 // create rest object to register commands
 const rest = new REST({ version: '10' }).setToken(token);
 
+rest.put(Routes.applicationGuildCommands(clientId, guildId), {body: [] })
+    .then(() => console.log("deleted all current commands."))
+    .catch(console.error);
+
 
 // deploy commands
 (async () => {
