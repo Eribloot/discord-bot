@@ -1,13 +1,15 @@
 // emitter for collecting user messages to monitor activity
-const { Permissions } = require("discord.js");
-const { Users } = require("../data/dbObjects.js");
-const { guildId } = require("../config.json");
+const { inBotChannel, inServer, hasSpecialRole } = require("../utils/Messages");
 
 module.exports = {
   name: "messageCreate",
   async execute(message) {
-    //if a bot or message is not in current server
-    if (message.author.bot || message.guildId != guildId) return;
+    //messages to ignore; if in bot channel, not server, or author is a bot
+    if(inBotChannel(message) || !inServer(message) || message.author.bot) return;
+
+    //if user is exempt
+    if(hasSpecialRole(message))
+
 
     // get info
     const currentUser = await Users.findOne({

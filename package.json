@@ -5,9 +5,7 @@
     "dayjs": "^1.11.0",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
-    "sequelize": "^6.17.0",
-    "sqlite": "^4.0.25",
-    "sqlite3": "^5.0.2"
+    "quick.db": "^9.0.2"
   },
   "name": "intergalactica-bot",
   "description": "",
