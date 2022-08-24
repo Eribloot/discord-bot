@@ -4,7 +4,7 @@
     "discord-api-types": "^0.26.1",
     "discord.js": "^14.2.0"
   },
-  "name": "intergalactica-bot",
+  "name": "schmeepo-bot",
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
